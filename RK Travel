@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YourCabs - Professional Transportation & Sightseeing Tours</title>
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e88e5;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 30px;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-menu a:hover {
+            color: #1e88e5;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Tabs for Audience Toggle */
+        .audience-tabs {
+            display: flex;
+            justify-content: center;
+            margin-top: 70px;
+            background: #f5f5f5;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 99;
+        }
+        
+        .tab-btn {
+            padding: 10px 20px;
+            margin: 0 5px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            color: #666;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn.active {
+            border-bottom: 3px solid #1e88e5;
+            color: #1e88e5;
+        }
+        
+        .tab-btn:hover {
+            color: #1e88e5;
+        }
+        
+        .content-section {
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("/api/placeholder/1200/600") center/cover no-repeat;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+            padding-top: 130px;
+        }
+        
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+        }
+        
+        /* Booking Form */
+        .booking-form {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #333;
+        }
+        
+        .booking-form h3 {
+            margin-bottom: 20px;
+            color: #1e88e5;
+            text-align: center;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+            gap: 15px;
+        }
+        
+        .form-group {
+            flex: 1 1 220px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input, 
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .btn {
+            background-color: #1e88e5;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #1565c0;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #777;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        
+        .service-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 30px;
+            flex: 1 1 300px;
+            max-width: 350px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-icon {
+            font-size: 40px;
+            color: #1e88e5;
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            margin-bottom: 15px;
+        }
+        
+        /* Fleet Section */
+        .fleet {
+            padding: 80px 0;
+        }
+        
+        .fleet-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        
+        .car-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            flex: 1 1 300px;
+            max-width: 350px;
+            transition: transform 0.3s;
+        }
+        
+        .car-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .car-img {
+            height: 200px;
+            background: url("/api/placeholder/350/200") center/cover no-repeat;
+        }
+        
+        .car-details {
+            padding: 20px;
+        }
+        
+        .car-details h3 {
+            margin-bottom: 10px;
+        }
+        
+        .car-details p {
+            color: #777;
+            margin-bottom: 15px;
+        }
+        
+        .car-price {
+            font-weight: bold;
+            color: #1e88e5;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Tour Packages */
+        .tour-packages {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .tour-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            flex: 1 1 300px;
+            max-width: 350px;
+            transition: transform 0.3s;
+        }
+        
+        .tour-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .tour-img {
+            height: 200px;
+            background: url("/api/placeholder/350/200") center/cover no-repeat;
+            position: relative;
+        }
+        
+        .tour-duration {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: rgba(30, 136, 229, 0.9);
+            color: white;
+            padding: 5px 15px;
+            font-weight: bold;
+        }
+        
+        .tour-details {
+            padding: 20px;
+        }
+        
+        .tour-details h3 {
+            margin-bottom: 10px;
+        }
+        
+        .tour-details p {
+            color: #777;
+            margin-bottom: 15px;
+        }
+        
+        .tour-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .tour-feature {
+            background: #f0f7ff;
+            color: #1e88e5;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .tour-price {
+            font-weight: bold;
+            color: #1e88e5;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Corporate Benefits */
+        .corporate-benefits {
+            padding: 80px 0;
+        }
+        
+        .benefits-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .benefit-card {
+            background-color: #f9f9f9;
+            border-left: 4px solid #1e88e5;
+            padding: 20px;
+            flex: 1 1 calc(50% - 20px);
+            display: flex;
+            align-items: center;
+        }
+        
+        .benefit-icon {
+            min-width: 60px;
+            height: 60px;
+            background: #e3f2fd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: th;
+            font-size: 24px;
+            color: #1e88e5;
+            margin-right: 20px;
+        }
+        
+        .benefit-text h4 {
+            margin-bottom: 5px;
+        }
+        
+        /* Tour Guide Section */
+        .tour-guides {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .guide-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            flex: 1 1 250px;
+            max-width: 280px;
+            text-align: center;
+        }
+        
+        .guide-img {
+            height: 200px;
+            background: url("/api/placeholder/280/200") center/cover no-repeat;
+        }
+        
+        .guide-details {
+            padding: 20px;
+        }
+        
+        .guide-details h3 {
+            margin-bottom: 5px;
+        }
+        
+        .guide-details .guide-role {
+            color: #1e88e5;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .languages {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        
+        .language-badge {
+            background: #e3f2fd;
+            color: #1e88e5;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+        }
+        
+        .testimonials-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        
+        .testimonial-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 30px;
+            flex: 1 1 300px;
+            max-width: 350px;
+        }
+        
+        .testimonial-text {
+            position: relative;
+            padding: 15px 0;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-text::before,
+        .testimonial-text::after {
+            content: '"';
+            font-size: 50px;
+            color: #1e88e5;
+            opacity: 0.3;
+            position: absolute;
+        }
+        
+        .testimonial-text::before {
+            top: -20px;
+            left: -15px;
+        }
+        
+        .testimonial-text::after {
+            bottom: -40px;
+            right: -15px;
+        }
+        
+        .client-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .client-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: url("/api/placeholder/50/50") center/cover no-repeat;
+            margin-right: 15px;
+        }
+        
+        /* Popular Routes Map */
+        .popular-routes {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .map-container {
+            position: relative;
+            height: 500px;
+            background: url("/api/placeholder/1000/500") center/cover no-repeat;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .map-point {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #1e88e5;
+            border-radius: 50%;
+            border: a;
+            border: 3px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+        
+        .map-point.point1 { top: 30%; left: 25%; }
+        .map-point.point2 { top: 45%; left: 40%; }
+        .map-point.point3 { top: 60%; left: 60%; }
+        .map-point.point4 { top: 35%; left: 70%; }
+        .map-point.point5 { top: 50%; left: 15%; }
+        
+        .map-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            width: 150px;
+            display: none;
+            z-index: 10;
+        }
+        
+        .map-point:hover .map-tooltip {
+            display: block;
+        }
+        
+        .route-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .route-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            padding: 15px;
+            flex: 1 1 calc(25% - 20px);
+            min-width: 200px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .route-icon {
+            width: 40px;
+            height: 40px;
+            background: #e3f2fd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #1e88e5;
+            margin-right: 15px;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+        }
+        
+        .contact-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .contact-info {
+            flex: 1 1 300px;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #1e88e5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 15px;
+        }
+        
+        .contact-form {
+            flex: 1 1 500px;
+            background-color: #f9f9f9;
+            padding: 30px;
+            border-radius: 8px;
+        }
+        
+        .contact-form h3 {
+            margin-bottom: 20px;
+        }
+        
+        .form-control {
+            margin-bottom: 20px;
+        }
+        
+        .form-control label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-control input,
+        .form-control textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .form-control textarea {
+            height: 120px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: #fff;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-col {
+            flex: 1 1 200px;
+        }
+        
+        .footer-col h4 {
+            color: #1e88e5;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #1e88e5;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #1e88e5;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #aaa;
+        }
+        
+        /* Language Selector */
+        .language-selector {
+            position: absolute;
+            top: 15px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .language-selector select {
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .booking-form {
+                padding: 20px;
+            }
+            
+            .audience-tabs {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .tab-btn {
+                margin: 5px 0;
+                text-align: center;
+            }
+            
+            .benefit-card {
+                flex: 1 1 100%;
+            }
+            
+            .language-selector {
+                position: static;
+                margin-top: 10px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">YourCabs</div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#fleet">Our Fleet</a></li>
+                <li><a href="#tours">Tours</a></li>
+                <li><a href="#corporate">Corporate</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="language-selector">
+                <select>
+                    <option value="en">English</option>
+                    <option value="hi">हिंदी</option>
+                    <option value="fr">Français</option>
+                    <option value="de">Deutsch</option>
+                    <option value="ja">日本語</option>
+                </select>
+            </div>
+            <div class="mobile-menu-btn">☰</div>
+        </div>
+    </header>
+
+    <!-- Audience Tabs -->
+    <div class="audience-tabs">
+        <button class="tab-btn active" data-target="tourists">Tourist Services</button>
+        <button class="tab-btn" data-target="corporate">Corporate Services</button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Explore India with Comfort & Style</h1>
+                <p>Your trusted partner for sightseeing tours and premium corporate transportation services across India</p>
+            </div>
+            
+            <!-- Booking Form -->
+            <div class="booking-form">
+                <h3>Book Your Ride or Tour</h3>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="service-type">Service Type</label>
+                            <select id="service-type">
+                                <option value="">Select Service</option>
+                                <option value="city-tour">City Tour</option>
+                                <option value="airport">Airport Transfer</option>
+                                <option value="corporate">Corporate Travel</option>
+                                <option value="custom-tour">Custom Tour</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="pickup">Pickup Location</label>
+                            <input type="text" id="pickup" placeholder="Enter pickup address">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" id="date">
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Time</label>
+                            <input type="time" id="time">
+                        </div>
+                        <div class="form-group">
+                            <label for="passengers">Passengers</label>
+                            <select id="passengers">
+                                <option value="1-2">1-2 Passengers</option>
+                                <option value="3-4">3-4 Passengers</option>
+                                <option value="5-6">5-6 Passengers</option>
+                                <option value="7+">7+ Passengers</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button type="submit" class="btn">Book Now</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tourist Content Section -->
+    <div class="content-section active" id="tourists-content">
+        <!-- Tour Packages -->
+        <section class="tour-packages" id="tours">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Popular Tour Packages</h2>
+                    <p>Discover India's beauty with our carefully crafted tour packages</p>
+                </div>
+                
+                <div class="services-grid">
+                    <div class="tour-card">
+                        <div class="tour-img">
+                            <div class="tour-duration">Full Day</div>
+                        </div>
+                        <div class="tour-details">
+                            <h3>Delhi Heritage Tour</h3>
+                            <p>Explore the rich history and architectural wonders of Delhi</p>
+                            <div class="tour-features">
+                                <span class="tour-feature">English Guide</span>
+                                <span class="tour-feature">Lunch Included</span>
+                                <span class="tour-feature">Monument Entry</span>
+                            </div>
+                            <div class="tour-price">From ₹4,500/person</div>
+                            <button class="btn">Book Tour</button>
+                        </div>
+                    </div>
+                    
+                    <div class="tour-card">
+                        <div class="tour-img">
+                            <div class="tour-duration">12 Hours</div>
+                        </div>
+                        <div class="tour-details">
+                            <h3>Agra Taj Mahal Tour</h3>
+                            <p>Visit the iconic Taj Mahal and Agra Fort with expert guides</p>
+                            <div class="tour-features">
+                                <span class="tour-feature">Multilingual</span>
+                                <span class="tour-feature">Breakfast & Lunch</span>
+                                <span class="tour-feature">Fast Track Entry</span>
+                            </div>
+                            <div class="tour-price">From ₹7,500/person</div>
+                            <button class="btn">Book Tour</button>
+                        </div>
+                    </div>
+                    
+                    <div class="tour-card">
+                        <div class="tour-img">
+                            <div class="tour-duration">2 Days</div>
+                        </div>
+                        <div class="tour-details">
+                            <h3>Jaipur Pink City Tour</h3>
+                            <p>Discover the majestic forts and palaces of Jaipur</p>
+                            <div class="tour-features">
+                                <span class="tour-feature">Luxury Stay</span>
+                                <span class="tour-feature">All Meals</span>
+                                <span class="tour-feature">Cultural Show</span>
+                            </div>
+                            <div class="tour-price">From ₹12,500/person</div>
+                            <button class="btn">Book Tour</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tour Guides -->
+        <section class="tour-guides">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Expert Tour Guides</h2>
+                    <p>Our knowledgeable multilingual guides enhance your travel experience</p>
+                </div>
+                
+                <div class="services-grid">
+                    <div class="guide-card">
+                        <div class="guide-img"></div>
+                        <div class="guide-details">
+                            <h3>Vikram Singh</h3>
+                            <div class="guide-role">Senior Tour Guide</div>
+                            <p>15+ years of experience with expertise in historical monuments</p>
+                            <div class="languages">
+                                <span class="language-badge">English</span>
+                                <span class="language-badge">Hindi</span>
+                                <span class="language-badge">French</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="guide-card">
+                        <div class="guide-img"></div>
+                        <div class="guide-details">
+                            <h3>Meera Patel</h3>
+                            <div class="guide-role">Cultural Expert</div>
+                            <p>Specialist in local traditions, arts, and culinary experiences</p>
+                            <div class="languages">
+                                <span class="language-badge">English</span>
+                                <span class="language-badge">Hindi</span>
+                                <span class="language-badge">German</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="guide-card">
+                        <div class="guide-img"></div>
+                        <div class="guide-details">
+                            <h3>Rajesh Kumar</h3>
+                            <div class="guide-role">Adventure Guide</div>
+                            <p>Expert in outdoor activities and off-beat destinations</p>
+                            <div class="languages">
+                                <span class="language-badge">English</span>
+                                <span class="language-badge">Hindi</span>
+                                <span class="language-badge">Japanese</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="guide-card">
+                        <div class="guide-img"></div>
+                        <div class="guide-details">
+                            <h3>Priya Sharma</h3>
+                            <div class="guide-role">Art Historian</div>
+                            <p>Specialized in ancient art, architecture and monuments</p>
+                            <div class="languages">
+                                <span class="language-badge">English</span>
+                                <span class="language-badge">Hindi</span>
+                                <span class="language-badge">Spanish</span>
